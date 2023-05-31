@@ -13,16 +13,15 @@ def run():
     @bot.event
     async def on_ready():
         logger.info(f"User: {bot.user} (ID: {bot.user.id})")
-    
-    @bot.command(
-            help="This is help",
-            description="This is the description",
-            brief="This is brief",
-            enabled=True
-    )
 
-    @bot.command
+    @bot.command(
+            help="I am still under development!",
+            description="Ping pong?",
+            brief="Ping pong!",
+            hidden=True
+    )
     async def ping(ctx):
+        """ Answers with pong """
         await ctx.send("pong")
 
     bot.run(settings.DISCORD_API_SECRET, root_logger=True)
