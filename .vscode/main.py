@@ -2,9 +2,12 @@ import settings
 import discord 
 from discord.ext import commands
 import requests, json, random, datetime, asyncio, schedule
+from datetime import date
 
 filename = ".vscode\schedule.txt"
 logger = settings.logging.getLogger("bot")
+
+    
 
 def run():
     intents = discord.Intents.default()
@@ -15,7 +18,7 @@ def run():
     @bot.event
     async def on_ready():
         logger.info(f"User: {bot.user} (ID: {bot.user.id})")
-        schedule_weekly_messages()
+        await send_weekly_message()
 
     @bot.command(
             help="I am still under development!",
@@ -27,58 +30,42 @@ def run():
         """ Answers with pong """
         await ctx.send("pong")
 
- 
-    # async def scheduled_message():
-    #     while True:
-    #         week = 0
-    #         now = datetime.datetime.now()
+    async def send_weekly_message():
 
-    #         #every week send the message
-    #         then = now + datetime.timedelta(days=7)
+        channel = bot.get_channel(902777744478310401)
 
-    #         #then = now.replace(hour=15, minute=30)
+        # Get today's date
+        today = date.today()
 
-    #         #then.replace(hour=15,minute=30)     #at 3:30pm
+        d2 = today.strftime("%B %d")
 
-    #         if then < now:
-    #             then += datetime.timedelta(days=1)
-     
-    #         wait_time = (then-now).total_seconds()
-    #         await asyncio.sleep(wait_time)
-
-    #         #testing server
-    #         channel = bot.get_channel(1112936855088943165)
-
-    #         await channel.send("@everyone PING PONG")
-    #         await asyncio.sleep(1)
-
-    #         week += 1
-
- 
-
-    def schedule_weekly_messages():
-        with open(filename, "r") as file:
+        # Open the text file
+        with open(filename, 'r') as file:
+            # Read each line
             lines = file.readlines()
 
-        for i, line in enumerate(lines, 1):
-            items = line.strip().split(",")  # Split the line by ","
-            date = items[0]
-            team1 = items[1]
-            team1_color = items[2]
-            team1_field = items[3]
-            team2 = items[4]
-            team2_color = items[5]
-            team2_field = items[6]
+            # Process each line
+            for line in lines:
+                # Split the line into fields
+                fields = line.strip().split(',')
 
-            message = f"On {date}, we are playing against {team1} wearing {team1_color} on field #{team1_field}. "
-            message += f"Our second game, we are playing against {team2} wearing {team2_color} on field #{team2_field}."
+                # Extract the fields
+                date_field = fields[0]
 
-            schedule.every().thursday.at("01:36").do(bot.loop.create_task, send_weekly_message(message))
+                # Compare today's date with the date from the field
+                if d2 == date_field:
+                    # Extract the remaining fields
+                    team1 = fields[1]
+                    color1 = fields[2]
+                    field1 = fields[3]
+                    team2 = fields[4]
+                    color2 = fields[5]
+                    field2 = fields[6]
 
-    async def send_weekly_message(message):
-
-        channel = bot.get_channel(1112936855088943165)
-        await channel.send(message)
+                    # Form the sentence
+                    sentence = f"On {date_field}, we are playing against {team1} wearing {color1} on field #{field1}. Next, we are playing against {team2} wearing {color2} on field #{field2}."
+                    
+                    await channel.send(sentence)
 
     bot.run(settings.DISCORD_API_SECRET, root_logger=True)
 
