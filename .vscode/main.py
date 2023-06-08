@@ -1,28 +1,12 @@
 import settings
 import discord 
 from discord.ext import commands
-import random, asyncio, schedule, datetime
+import random
 from datetime import date
-import pytz
+
 
 filename = ".vscode\schedule.txt"
 logger = settings.logging.getLogger("bot")
-# Get the current UTC time
-utc_now = datetime.datetime.now(datetime.timezone.utc)
-
-# Define the Eastern Time Zone
-eastern_tz = pytz.timezone('US/Eastern')
-
-# Convert UTC time to Eastern Time Zone
-et_now = utc_now.astimezone(eastern_tz)
-
-# Print the converted time
-print("Scheduled function executed at:", et_now)
-
-# Get the system's default time zone
-default_timezone = datetime.datetime.now(datetime.timezone.utc).astimezone().tzinfo
-print("Default time zone:", default_timezone)
-
 
 def run():
     intents = discord.Intents.default()
@@ -49,7 +33,7 @@ def run():
         await ctx.send("pong")
     
     async def weekly_standing():
-        channel = bot.get_channel(1112936855088943165)
+        channel = bot.get_channel(1109852414972010586)
        
         data = []
         message = ""
@@ -82,7 +66,7 @@ def run():
 
     async def send_weekly_message():
 
-        channel = bot.get_channel(1112936855088943165)
+        channel = bot.get_channel(1109852414972010586)
 
         # Get today's date
         today = date.today()
