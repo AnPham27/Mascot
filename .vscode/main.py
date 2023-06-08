@@ -1,13 +1,28 @@
 import settings
 import discord 
 from discord.ext import commands
-import requests, json, random, datetime, asyncio, schedule
+import random, asyncio, schedule, datetime
 from datetime import date
+import pytz
 
 filename = ".vscode\schedule.txt"
 logger = settings.logging.getLogger("bot")
+# Get the current UTC time
+utc_now = datetime.datetime.now(datetime.timezone.utc)
 
-    
+# Define the Eastern Time Zone
+eastern_tz = pytz.timezone('US/Eastern')
+
+# Convert UTC time to Eastern Time Zone
+et_now = utc_now.astimezone(eastern_tz)
+
+# Print the converted time
+print("Scheduled function executed at:", et_now)
+
+# Get the system's default time zone
+default_timezone = datetime.datetime.now(datetime.timezone.utc).astimezone().tzinfo
+print("Default time zone:", default_timezone)
+
 
 def run():
     intents = discord.Intents.default()
@@ -18,6 +33,8 @@ def run():
     @bot.event
     async def on_ready():
         logger.info(f"User: {bot.user} (ID: {bot.user.id})")
+        #schedule.every().thursday.at("10:00").do(asyncio.run, send_weekly_message)
+
         await send_weekly_message()
 
     @bot.command(
@@ -66,6 +83,7 @@ def run():
                     sentence = f"On {date_field}, we are playing against {team1} wearing {color1} on field #{field1}. Next, we are playing against {team2} wearing {color2} on field #{field2}."
                     
                     await channel.send(sentence)
+
 
     bot.run(settings.DISCORD_API_SECRET, root_logger=True)
 
