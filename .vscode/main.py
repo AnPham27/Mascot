@@ -19,8 +19,6 @@ def run():
         logger.info(f"User: {bot.user} (ID: {bot.user.id})")
         #schedule.every().thursday.at("10:00").do(asyncio.run, send_weekly_message)
 
-        await send_weekly_message()
-        await weekly_standing()
 
     @bot.command(
             help="I am still under development!",
@@ -31,9 +29,20 @@ def run():
     async def ping(ctx):
         """ Answers with pong """
         await ctx.send("pong")
-    
+
+    @bot.command(
+            help="I am still under development!",
+            description="Posting the schedule",
+            brief="Posts the schedule",
+            hidden=True
+    )
+    async def schedule(ctx):
+        """ Answers with the schedule for that day """
+        await send_weekly_message()
+        await weekly_standing()
+
     async def weekly_standing():
-        channel = bot.get_channel(1109852414972010586)
+        channel = bot.get_channel(1112936855088943165)
        
         data = []
         message = ""
@@ -61,12 +70,13 @@ def run():
         table += "```"
     
         # Call the function to print the table
+
         await channel.send(table)
         await channel.send(message)
 
     async def send_weekly_message():
 
-        channel = bot.get_channel(1109852414972010586)
+        channel = bot.get_channel(1112936855088943165)
 
         # Get today's date
         today = date.today()
@@ -100,6 +110,7 @@ def run():
                     sentence = f"@everyone \nOn {date_field}, we are playing against **{team1}** wearing **{color1}** on **field #{field1}**. Next, we are playing against **{team2}** wearing **{color2}** on **field #{field2}**."
                     
                     await channel.send(sentence)
+
 
 
     bot.run(settings.DISCORD_API_SECRET, root_logger=True)
