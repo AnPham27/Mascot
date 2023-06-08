@@ -1,5 +1,5 @@
 May 25,5Alive,Dark,5,Hammerroids,Dark,6
-June 07,DISCount Athletes,Dark,6,The Huck Tales,Dark,5
+June 01,DISCount Athletes,Dark,6,The Huck Tales,Dark,5
 June 08,Huck Dynasty,White,5,DISCount Athletes,White,4
 June 15,The Huck Tales,Dark,6,Handle With Care,Dark,9
 June 22,5Alive,White,5,Deborah,White,4
