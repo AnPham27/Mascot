@@ -49,7 +49,7 @@ def run():
         await ctx.send("pong")
     
     async def weekly_standing():
-        channel = bot.get_channel(902777744478310401)
+        channel = bot.get_channel(1112936855088943165)
        
         data = []
         message = ""
@@ -63,15 +63,16 @@ def run():
 
         # Function to print the table
         
-        headers = ['PLACE', 'TEAM', 'WIN', 'LOSS', 'TIE', 'POINTS', 'SPIRIT']
-        header_format = '{:<6} {:<20} {:<4} {:<5} {:<4} {:<10} {:<16}'
+        headers = ['PL', 'TEAM', 'W', 'L', 'SPIRIT']
+        header_format = '{:<4} {:<17} {:<2} {:<2} {:<6}'
 
-        table = f"```{header_format.format(*headers)}\n"
+        table = f"```\n{header_format.format(*headers)}\n"
 
         for row in data:
-            table += f"{row[0]:<6} {row[1]:<20} {row[2]:<4} {row[3]:<5} {row[4]:<4} {row[5]:<10} {row[6]:<16}\n"
+            table += f"{row[0]:<4} {row[1]:<17} {row[2]:<2} {row[3]:<2} {row[4]:<6}\n"
+
             if row[1] == "Uppercuts":
-                message += f"We are currently in {row[0]}th place. Our spirit score is {row[6]}. KEEP IT UP!!"
+                message += f"We are currently in {row[0]}th place. Our spirit score is {row[4]}. KEEP IT UP!!"
                 
         table += "```"
     
@@ -81,7 +82,7 @@ def run():
 
     async def send_weekly_message():
 
-        channel = bot.get_channel(902777744478310401)
+        channel = bot.get_channel(1112936855088943165)
 
         # Get today's date
         today = date.today()
@@ -112,7 +113,7 @@ def run():
                     field2 = fields[6]
 
                     # Form the sentence
-                    sentence = f"On {date_field}, we are playing against {team1} wearing {color1} on field #{field1}. Next, we are playing against {team2} wearing {color2} on field #{field2}."
+                    sentence = f"@everyone \nOn {date_field}, we are playing against **{team1}** wearing **{color1}** on **field #{field1}**. Next, we are playing against **{team2}** wearing **{color2}** on **field #{field2}**."
                     
                     await channel.send(sentence)
 
