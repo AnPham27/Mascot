@@ -1,0 +1,10 @@
+1,Deborah,8,0,0,16,5.00
+2,Hammer Time,7,1,0,14,4.75
+3,The Butterfingers,7,1,0,14,4.69
+4,Hammerrhoids,5,3,0,10,5.00
+5,The Huck Tales,4,4,0,8,4.88
+6,DISCount Athletes,3,5,0,6,5.00
+7,Handle With Care,3,5,0,6,4.63
+8,Uppercuts,1,7,0,2,5.00
+9,Huck Dynasty,1,7,0,2,5.00
+10,5Alive,1,7,0,2,5.00
