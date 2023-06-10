@@ -3,6 +3,8 @@ import discord
 from discord.ext import commands
 import random
 from datetime import date
+import schedule_scraper
+from standings_scraper import standings
 
 
 filename = ".vscode\schedule.txt"
@@ -53,36 +55,12 @@ def run():
 
     async def weekly_standing():
         channel = bot.get_channel(1112936855088943165)
-       
-        data = []
-        message = ""
-        with open('.vscode\standing.txt', 'r') as file:
-            # Read each line
-            lines = file.readlines()
 
-            for line in lines:
-                fields = line.strip().split(',')
-                data.append(fields)
-
-        # Function to print the table
+        table, message = standings()
         
-        headers = ['PL', 'TEAM', 'W', 'L', 'SPIRIT']
-        header_format = '{:<4} {:<17} {:<2} {:<2} {:<6}'
-
-        table = f"```\n{header_format.format(*headers)}\n"
-
-        for row in data:
-            table += f"{row[0]:<4} {row[1]:<17} {row[2]:<2} {row[3]:<2} {row[4]:<6}\n"
-
-            if row[1] == "Uppercuts":
-                message += f"We are currently in {row[0]}th place. Our spirit score is {row[4]}. KEEP IT UP!!"
-                
-        table += "```"
-    
-        # Call the function to print the table
-
         await channel.send(table)
         await channel.send(message)
+
 
     async def send_weekly_message():
 
