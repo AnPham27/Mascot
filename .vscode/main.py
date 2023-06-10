@@ -39,7 +39,17 @@ def run():
     async def schedule(ctx):
         """ Answers with the schedule for that day """
         await send_weekly_message()
+
+    @bot.command(
+            help="I am still under development!",
+            description="Posting the schedule",
+            brief="Posts the schedule",
+            hidden=True
+    )
+    async def standing(ctx):
+        """ Answers with the standing for that day """
         await weekly_standing()
+   
 
     async def weekly_standing():
         channel = bot.get_channel(1112936855088943165)
