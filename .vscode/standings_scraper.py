@@ -108,7 +108,7 @@ def standings():
             chart += f"{place:<4} {r[0]:<17} {r[1]:<2} {r[2]:<2} {r[5]:<6}\n"
 
             if r[0] == "Uppercuts":
-                message += f"We are currently in {place}th place. Our spirit score is still being calculated. KEEP IT UP!!"
+                message += f"We are currently in {place}th place. Our spirit score is {r[5]}! KEEP IT UP!!"
             place += 1
         chart += "```"
     
