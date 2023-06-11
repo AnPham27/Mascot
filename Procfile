@@ -1,1 +1,1 @@
-worker: python3 C:\Users\annep\OneDrive\VS Folders\Mascot\Procfile
+worker: python3 C:\Users\annep\OneDrive\VS Folders\Mascot\.vscode\main.py
