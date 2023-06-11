@@ -72,7 +72,6 @@ def run():
         channel = bot.get_channel(1112936855088943165)
 
         table, message = standings()
-        
         await channel.send(table)
         await channel.send(message)
 
