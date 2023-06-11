@@ -1,1 +1,1 @@
-worker: python3 .vscode.main.py
+worker: python3 main.py
