@@ -3,7 +3,6 @@ import discord
 from discord.ext import commands
 import random
 from datetime import date
-import schedule_scraper
 from standings_scraper import standings
 from schedule_scraper import get_schedule
 from datetime import date
