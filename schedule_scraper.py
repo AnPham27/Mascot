@@ -4,7 +4,7 @@ from datetime import date
 import calendar
 
 
-def get_schedule(date):
+def get_schedule():
     try:
         source = requests.get("https://data.perpetualmotion.org/allSports/schedule.php?leagueID=1957")
         #source = requests.get("https://data.perpetualmotion.org/web-app/standings/1955")
