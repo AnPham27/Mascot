@@ -61,15 +61,17 @@ def run():
     )
     async def standing(ctx):
         """ Answers with the standing for that day """
-        await weekly_standing()
+        await weekly_standing(ctx)
    
 
-    async def weekly_standing():
-        channel = bot.get_channel(1112936855088943165)
+    async def weekly_standing(ctx):
+        #channel = bot.get_channel(1112936855088943165)
 
         table, message = standings()
-        await channel.send(table)
-        await channel.send(message)
+        await ctx.send(message)
+        await ctx.send(table)
+        #await channel.send(table)
+        #await channel.send(message)
 
 
     bot.run(settings.DISCORD_API_SECRET)
