@@ -48,7 +48,7 @@ def run():
 
         #today_date = "Thursday, May 11"
 
-        message = get_schedule(today_date)
+        message = get_schedule()
 
         await channel.send(message)
 
