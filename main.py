@@ -74,7 +74,7 @@ def run():
         await channel.send(message)
 
 
-    bot.run(settings.DISCORD_API_SECRET, root_logger=True)
+    bot.run(settings.DISCORD_API_SECRET)
 
 if __name__ == '__main__':
     run()
