@@ -77,4 +77,5 @@ def run():
     bot.run(settings.DISCORD_API_SECRET)
 
 if __name__ == '__main__':
+    print(settings.DISCORD_API_SECRET)
     run()

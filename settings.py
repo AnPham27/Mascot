@@ -4,7 +4,8 @@ from logging.config import dictConfig
 
 
 
-DISCORD_API_SECRET = os.getenv("DISCORD_API_TOKEN")
+#DISCORD_API_SECRET = os.getenv("DISCORD_API_TOKEN")
+
 
 LOGGING_CONFIG = {
     "version": 1,
