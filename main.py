@@ -5,8 +5,7 @@ import random
 from datetime import date
 from standings_scraper import standings
 from schedule_scraper import get_schedule
-from datetime import date
-import calendar
+
 
 
 #filename = "schedule.txt"
@@ -45,11 +44,10 @@ def run():
 
     async def weekly_schedule():
         channel = bot.get_channel(1112936855088943165)
-        # Get today's date
-        today = date.today()
-        d2 = today.strftime("%B %d")
-        today_date = f"{calendar.day_name[today.weekday()]}, {d2}"
-        today_date = "Thursday, May 11"
+
+
+        #today_date = "Thursday, May 11"
+
         message = get_schedule(today_date)
 
         await channel.send(message)

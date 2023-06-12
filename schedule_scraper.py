@@ -1,6 +1,7 @@
 import requests
 from bs4 import BeautifulSoup
-
+from datetime import date
+import calendar
 
 
 def get_schedule(date):
@@ -14,6 +15,10 @@ def get_schedule(date):
     except Exception as e:
         print(e)
 
+    # Get today's date
+    today = date.today()
+    d2 = today.strftime("%B %d")
+    today_date = f"{calendar.day_name[today.weekday()]}, {d2}"
 
 
     number = soup.find("table", class_="teamlist f-small").find_all(id="team_num_cell")
@@ -48,7 +53,13 @@ def get_schedule(date):
 
     for i in day:
         days.append(i.text)
+    
 
+    for i in days:
+        if i == today_date:
+            break
+        else:
+            return ("There are no games today! Check again on Thursday")
     #print(days)
 
     # nums =[]
@@ -107,7 +118,7 @@ def get_schedule(date):
     print(flagged_arrays)
 
 
-    date = "Thursday, May 18"
+    #date = "Thursday, May 18"
 
     current_games = []
 
