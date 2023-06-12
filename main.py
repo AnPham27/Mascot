@@ -9,7 +9,7 @@ from datetime import date
 import calendar
 
 
-filename = ".vscode\schedule.txt"
+#filename = "schedule.txt"
 logger = settings.logging.getLogger("bot")
 
 def run():
@@ -50,7 +50,7 @@ def run():
         today = date.today()
         d2 = today.strftime("%B %d")
         today_date = f"{calendar.day_name[today.weekday()]}, {d2}"
-        today_date = "Thursday, May 18"
+        today_date = "Thursday, May 11"
         message = get_schedule(today_date)
 
         await channel.send(message)
