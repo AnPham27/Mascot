@@ -29,13 +29,6 @@ def run():
         help_embed.add_field(name="!command2", value="Description of command 2.")
         # Add more fields for each command
     
-    # await ctx.send(embed=help_embed)
-    # @bot.command(
-    #         help="I am still under development!",
-    #         description="Ping pong?",
-    #         brief="Ping pong!",
-    #         hidden=True
-    # )
     async def ping(ctx):
         """ Answers with pong """
         await ctx.send("pong")
@@ -60,13 +53,6 @@ def run():
 
         await channel.send(message)
 
-
-    @bot.command(
-            help="I am still under development!",
-            description="Posting the schedule",
-            brief="Posts the schedule",
-            hidden=True
-    )
     async def standing(ctx):
         """ Answers with the standing for that day """
         await weekly_standing(ctx)
