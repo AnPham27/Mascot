@@ -21,13 +21,21 @@ def run():
         logger.info(f"User: {bot.user} (ID: {bot.user.id})")
         #schedule.every().thursday.at("10:00").do(asyncio.run, send_weekly_message)
 
-
-    @bot.command(
-            help="I am still under development!",
-            description="Ping pong?",
-            brief="Ping pong!",
-            hidden=True
-    )
+    @bot.command()
+    async def help(ctx):
+        # Customize the help message for the !help command
+        help_embed = discord.Embed(title="Bot Help", description="Here are the available commands:")
+        help_embed.add_field(name="!command1", value="Description of command 1.")
+        help_embed.add_field(name="!command2", value="Description of command 2.")
+        # Add more fields for each command
+    
+    # await ctx.send(embed=help_embed)
+    # @bot.command(
+    #         help="I am still under development!",
+    #         description="Ping pong?",
+    #         brief="Ping pong!",
+    #         hidden=True
+    # )
     async def ping(ctx):
         """ Answers with pong """
         await ctx.send("pong")
@@ -68,8 +76,9 @@ def run():
         #channel = bot.get_channel(1112936855088943165)
 
         table, message = standings()
-        await ctx.send(message)
         await ctx.send(table)
+        await ctx.send(message)
+
         #await channel.send(table)
         #await channel.send(message)
 
