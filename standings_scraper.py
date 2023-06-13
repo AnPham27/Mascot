@@ -5,7 +5,6 @@ from bs4 import BeautifulSoup
 def standings():
     try:
         source = requests.get("https://data.perpetualmotion.org/web-app/standings/1957")
-        #source = requests.get("https://data.perpetualmotion.org/web-app/standings/1955")
         source.raise_for_status()
 
         soup = BeautifulSoup(source.text, 'html.parser')
@@ -15,20 +14,12 @@ def standings():
 
     # table = soup.find("table", class_="activeStandings table table-condensed table-striped f-small").find_all("th")
 
-    # headers = []
-
-    # for i in table:
-    #     headers.append(i.text)
 
     teams = soup.find("tbody").find_all("a")
     names = []
 
     for i in teams:
         names.append((i.text).replace("The ",''))
-
-    # print("headers:" , headers)
-    # print("team names:" ,names)
-
 
     scores = soup.find("tbody").find_all("td", class_="text-center")
 
@@ -38,7 +29,7 @@ def standings():
     for i in scores:
         point.append(i.text)
 
-    # print("all the scores:" , point)
+  
         
     #no spirit score yet ~ less than 24 hours
     if len(point) == (len(names) * 4):

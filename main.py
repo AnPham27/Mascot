@@ -40,17 +40,11 @@ def run():
     )
     async def schedule(ctx):
         """ Answers with the schedule for that day """
-        await weekly_schedule()
+        await weekly_schedule(ctx)
 
-    async def weekly_schedule():
-        channel = bot.get_channel(1112936855088943165)
-
-
-        #today_date = "Thursday, May 11"
-
-        message = get_schedule()
-
-        await channel.send(message)
+    async def weekly_schedule(ctx):
+        #channel = bot.get_channel(1112936855088943165)
+        await ctx.send(get_schedule())
     
     @bot.command(
             help="I am still under development!",
@@ -65,10 +59,6 @@ def run():
 
     async def next_schedule(ctx,day):
         # channel = bot.get_channel(1112936855088943165)
-
-
-        #today_date = "Thursday, May 11"
-
         message = get_upcoming_schedule(day)
 
         await ctx.send(message)
@@ -87,14 +77,9 @@ def run():
 
     async def weekly_standing(ctx):
         #channel = bot.get_channel(1112936855088943165)
-
         table, message = standings()
         await ctx.send(table)
         await ctx.send(message)
-
-        #await channel.send(table)
-        #await channel.send(message)
-
 
     bot.run(settings.DISCORD_API_SECRET)
 

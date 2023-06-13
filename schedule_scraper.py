@@ -31,7 +31,7 @@ def get_schedule():
 
 
 
-    index = 0
+  
     for i in number:
         numbers.append(i.text)
 
@@ -51,7 +51,7 @@ def get_schedule():
     #day = soup.find("table").find_all("th", id="week_header")
     day = soup.find("table", class_="schedWeek table table-condensed table-striped table-responsive f-small").find_all_next("th", id="week_header")
     days = []
-    index = 0
+   
     
     for i in day:
         days.append(i.text)
@@ -121,8 +121,6 @@ def get_schedule():
 
     #print(flagged_arrays)
 
-
-    
    
     current_games = []
 
@@ -131,9 +129,8 @@ def get_schedule():
             current_games.append(array)
 
     
-
     #print(current_games)
-    game = ""
+  
     #
     # DATE, Field #, LEFT , RIGHT, LEFT, RIGHT 
     # 0  ,    1 ,     2,     3 ,    4 ,   5
@@ -227,8 +224,6 @@ def get_upcoming_schedule(upcoming_date):
     teams = []
 
 
-
-    index = 0
     for i in number:
         numbers.append(i.text)
 
@@ -243,12 +238,9 @@ def get_upcoming_schedule(upcoming_date):
     # '8': 'Hammer Time', '4': 'Uppercuts', '9': 'Handle With Care', '5': 'Huck Tales', '10': 'Deborah'}
 
 
-
-
     #day = soup.find("table").find_all("th", id="week_header")
     day = soup.find("table", class_="schedWeek table table-condensed table-striped table-responsive f-small").find_all_next("th", id="week_header")
     days = []
-    index = 0
 
     for i in day:
         days.append(i.text)
@@ -333,7 +325,6 @@ def get_upcoming_schedule(upcoming_date):
     #print("MEEP")
 
     #print(current_games)
-    game = ""
     #
     # DATE, Field #, LEFT , RIGHT, LEFT, RIGHT 
     # 0  ,    1 ,     2,     3 ,    4 ,   5
