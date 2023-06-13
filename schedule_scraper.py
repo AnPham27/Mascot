@@ -256,6 +256,8 @@ def get_upcoming_schedule(upcoming_date):
 
     if today_date in days:
         print("yes")
+    elif today_date == "Thursday, June 29":
+        return(f"We have playoffs that day, and there is no schedule for that yet.")
     else:
         return(f"There are no games on {today_date}. Check for a different date")
     
