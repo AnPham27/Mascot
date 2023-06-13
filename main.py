@@ -4,7 +4,7 @@ from discord.ext import commands
 import random
 from datetime import date
 from standings_scraper import standings
-from schedule_scraper import get_schedule
+from schedule_scraper import get_schedule, get_upcoming_schedule
 
 
 
@@ -49,6 +49,26 @@ def run():
         #today_date = "Thursday, May 11"
 
         message = get_schedule()
+
+        await channel.send(message)
+    
+    @bot.command(
+            help="I am still under development!",
+            description="Posting the schedule",
+            brief="Posts the schedule",
+            hidden=True
+    )
+    async def upcoming_schedule(ctx):
+        """ Answers with the schedule for that day """
+        await next_schedule(ctx)
+
+    async def next_schedule(ctx):
+        channel = bot.get_channel(1112936855088943165)
+
+
+        #today_date = "Thursday, May 11"
+
+        message = get_upcoming_schedule(ctx)
 
         await channel.send(message)
 

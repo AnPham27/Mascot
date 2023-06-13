@@ -3,7 +3,6 @@ import logging
 from logging.config import dictConfig
 
 
-
 DISCORD_API_SECRET = os.getenv("DISCORD_API_TOKEN")
 
 
