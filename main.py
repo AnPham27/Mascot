@@ -58,19 +58,20 @@ def run():
             brief="Posts the schedule",
             hidden=True
     )
-    async def upcoming_schedule(ctx):
+    async def upcoming_schedule(ctx, date1, date2, date3):
         """ Answers with the schedule for that day """
-        await next_schedule(ctx)
+        day = f"{date1} {date2} {date3}"
+        await next_schedule(ctx, day)
 
-    async def next_schedule(ctx):
-        channel = bot.get_channel(1112936855088943165)
+    async def next_schedule(ctx,day):
+        # channel = bot.get_channel(1112936855088943165)
 
 
         #today_date = "Thursday, May 11"
 
-        message = get_upcoming_schedule(ctx)
+        message = get_upcoming_schedule(day)
 
-        await channel.send(message)
+        await ctx.send(message)
 
 
     @bot.command(

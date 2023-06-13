@@ -20,7 +20,8 @@ def get_schedule():
     today = date.today()
     d2 = today.strftime("%B %d")
     today_date = f"{calendar.day_name[today.weekday()]}, {d2}"
-
+    
+    # today_date = "Thursday, June 15"
 
     number = soup.find("table", class_="teamlist f-small").find_all(id="team_num_cell")
     team = soup.find("table", class_="teamlist f-small").find_all("a")
@@ -51,16 +52,18 @@ def get_schedule():
     day = soup.find("table", class_="schedWeek table table-condensed table-striped table-responsive f-small").find_all_next("th", id="week_header")
     days = []
     index = 0
-
+    
     for i in day:
         days.append(i.text)
+    # print(days)
+
+    
+    if today_date in days:
+        print("yes")
+    else:
+        return("There are no games today! Check again on Thursday")
     
 
-    for i in days:
-        if i == today_date:
-            break
-        else:
-            return ("There are no games today! Check again on Thursday")
     #print(days)
 
     # nums =[]
@@ -116,18 +119,18 @@ def get_schedule():
         if '4' in sub_array:
             flagged_arrays.append(sub_array)
 
-    print(flagged_arrays)
+    #print(flagged_arrays)
 
 
-    #date = "Thursday, May 18"
-
+    
+   
     current_games = []
 
     for array in flagged_arrays:
         if array[0] == today_date:
             current_games.append(array)
 
-    print("MEEP")
+    
 
     #print(current_games)
     game = ""
@@ -148,8 +151,8 @@ def get_schedule():
                 second.append(current_games[i])
 
         
-    print(first)
-    print(second)
+    # print(first)
+    # print(second)
 
 
     colour = ''
@@ -172,8 +175,8 @@ def get_schedule():
         second.append(colour)
 
 
-    print(first)
-    print(second)
+    # print(first)
+    # print(second)
 
 
     #two cases if games are on separate fields 
@@ -251,11 +254,11 @@ def get_upcoming_schedule(upcoming_date):
         days.append(i.text)
     
 
-    # for i in days:
-    #     if i == today_date:
-    #         break
-    #     else:
-    #         return ("There are no games today! Check again on Thursday")
+    if today_date in days:
+        print("yes")
+    else:
+        return(f"There are no games on {today_date}. Check for a different date")
+    
 
     #print(days)
 
@@ -312,10 +315,10 @@ def get_upcoming_schedule(upcoming_date):
         if '4' in sub_array:
             flagged_arrays.append(sub_array)
 
-    print(flagged_arrays)
+    #print(flagged_arrays)
 
 
-    #date = "Thursday, May 18"
+    #today_date = "Thursday, May 18"
 
     current_games = []
 
@@ -323,7 +326,7 @@ def get_upcoming_schedule(upcoming_date):
         if array[0] == today_date:
             current_games.append(array)
 
-    print("MEEP")
+    #print("MEEP")
 
     #print(current_games)
     game = ""
@@ -344,8 +347,8 @@ def get_upcoming_schedule(upcoming_date):
                 second.append(current_games[i])
 
         
-    print(first)
-    print(second)
+    # print(first)
+    # print(second)
 
 
     colour = ''
@@ -368,8 +371,8 @@ def get_upcoming_schedule(upcoming_date):
         second.append(colour)
 
 
-    print(first)
-    print(second)
+    # print(first)
+    # print(second)
 
 
     #two cases if games are on separate fields 
@@ -380,10 +383,10 @@ def get_upcoming_schedule(upcoming_date):
 
     #first game 
     if first[1] == 'Dark':
-        message = f"@everyone {today_date}: our first game we are playing against **{dictionary[first[0][3]]}** wearing **{first[1]}** on **{first[0][1]}**. "
+        message = f"{today_date}: our first game we are playing against **{dictionary[first[0][3]]}** wearing **{first[1]}** on **{first[0][1]}**. "
 
     else:   
-        message = f"@everyone {today_date}: our first game we are playing against **{dictionary[first[0][5]]}** wearing **{first[1]}** on **{first[0][1]}**. "
+        message = f"{today_date}: our first game we are playing against **{dictionary[first[0][5]]}** wearing **{first[1]}** on **{first[0][1]}**. "
 
     #second game
     if second[1] == 'Dark':
