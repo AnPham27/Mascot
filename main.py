@@ -70,6 +70,23 @@ def run():
             brief="Posts the schedule",
             hidden=True
     )
+    async def upcoming(date1, date2, date3):
+        """ Answers with the schedule for that day """
+        day = f"{date1} {date2} {date3}"
+        await everyone_schedule(day)
+
+    async def everyone_schedule(day):
+        channel = bot.get_channel(902777744478310401)
+        message = "@everyone" + get_upcoming_schedule(day)
+
+        await channel.send(message)
+
+    @bot.command(
+            help="I am still under development!",
+            description="Posting the schedule",
+            brief="Posts the schedule",
+            hidden=True
+    )
     async def standing(ctx):
         """ Answers with the standing for that day """
         await weekly_standing(ctx)
