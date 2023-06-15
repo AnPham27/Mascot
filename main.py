@@ -76,7 +76,7 @@ def run():
         await everyone_schedule(ctx, day)
 
     async def everyone_schedule(ctx, day):
-        channel = bot.get_channel(902777744478310401)
+        channel = bot.get_channel(1109852414972010586)
         message = f"@everyone {get_upcoming_schedule(day)}"
 
         await channel.send(message)
