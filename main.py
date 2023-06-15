@@ -70,12 +70,12 @@ def run():
             brief="Posts the schedule",
             hidden=True
     )
-    async def upcoming(date1, date2, date3):
+    async def upcoming(ctx, date1, date2, date3):
         """ Answers with the schedule for that day """
         day = f"{date1} {date2} {date3}"
-        await everyone_schedule(day)
+        await everyone_schedule(ctx, day)
 
-    async def everyone_schedule(day):
+    async def everyone_schedule(ctx, day):
         channel = bot.get_channel(902777744478310401)
         message = f"@everyone {get_upcoming_schedule(day)}"
 
