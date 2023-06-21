@@ -71,15 +71,20 @@ def run():
             hidden=True
     )
     async def upcoming(ctx, date1, date2, date3):
-        """ Answers with the schedule for that day """
+        """ @EVERYONE the schedule for the day and the standing """
         day = f"{date1} {date2} {date3}"
         await everyone_schedule(ctx, day)
 
     async def everyone_schedule(ctx, day):
-        channel = bot.get_channel(1109852414972010586)
+        #channel = bot.get_channel(1109852414972010586) @ main channel
+        channel = bot.get_channel(1112936855088943165) #@ bot testing channel
         message = f"@everyone {get_upcoming_schedule(day)}"
 
+        table, msg = standing()
+
         await channel.send(message)
+        await channel.send(table)
+        await channel.send(msg)
 
     @bot.command(
             help="I am still under development!",
