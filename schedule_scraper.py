@@ -324,7 +324,7 @@ def get_upcoming_schedule(upcoming_date):
 
     #print("MEEP")
 
-    #print(current_games)
+    print(current_games)
     #
     # DATE, Field #, LEFT , RIGHT, LEFT, RIGHT 
     # 0  ,    1 ,     2,     3 ,    4 ,   5
@@ -381,7 +381,7 @@ def get_upcoming_schedule(upcoming_date):
         message = f"{today_date}: our first game we are playing against **{dictionary[first[0][3]]}** wearing **{first[1]}** on **{first[0][1]}**. "
 
     else:   
-        message = f"{today_date}: our first game we are playing against **{dictionary[first[0][5]]}** wearing **{first[1]}** on **{first[0][1]}**. "
+        message = f"{today_date}: our first game we are playing against **{dictionary[first[0][2]]}** wearing **{first[1]}** on **{first[0][1]}**. "
 
     #second game
     if second[1] == 'Dark':
