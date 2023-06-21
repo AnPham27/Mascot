@@ -324,7 +324,7 @@ def get_upcoming_schedule(upcoming_date):
 
     #print("MEEP")
 
-    print(current_games)
+    #print(current_games)
     #
     # DATE, Field #, LEFT , RIGHT, LEFT, RIGHT 
     # 0  ,    1 ,     2,     3 ,    4 ,   5
