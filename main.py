@@ -28,6 +28,8 @@ def run():
             brief="Ping pong!",
             hidden=True
     )
+
+
     async def ping(ctx):
         """ Answers with pong """
         await ctx.send("pong")
@@ -38,6 +40,7 @@ def run():
             brief="Posts the schedule",
             hidden=True
     )
+
     async def schedule(ctx):
         """ Answers with the schedule for that day """
         await weekly_schedule(ctx)
@@ -46,6 +49,8 @@ def run():
         #channel = bot.get_channel(1112936855088943165)
         await ctx.send(get_schedule())
     
+
+
     @bot.command(
             help="I am still under development!",
             description="Posting the schedule",
@@ -80,7 +85,7 @@ def run():
         channel = bot.get_channel(1112936855088943165) #@ bot testing channel
         message = f"@everyone {get_upcoming_schedule(day)}"
 
-        table, msg = standing()
+        table, msg = standings()
 
         await channel.send(message)
         await channel.send(table)
