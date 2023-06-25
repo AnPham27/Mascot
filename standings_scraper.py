@@ -52,7 +52,7 @@ def standings():
             result=[]  
 
 
-        headers = ['PL', 'TEAM', 'W', 'L', 'POINTS']
+        headers = ['PL', 'TEAM', 'W', 'L', 'PTS']
         header_format = '{:<3} {:<17} {:<2} {:<2} {:<6}'
 
         chart = f"```\n{header_format.format(*headers)}\n"
@@ -88,7 +88,7 @@ def standings():
             result=[]  
             
 
-        headers = ['PL', 'TEAM', 'W', 'L', 'SPIRIT']
+        headers = ['PL', 'TEAM', 'W', 'L', 'SPRT']
         header_format = '{:<3} {:<17} {:<2} {:<2} {:<6}'
 
         chart = f"```\n{header_format.format(*headers)}\n"
