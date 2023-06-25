@@ -53,7 +53,7 @@ def standings():
 
 
         headers = ['PL', 'TEAM', 'W', 'L', 'POINTS']
-        header_format = '{:<4} {:<17} {:<2} {:<2} {:<6}'
+        header_format = '{:<3} {:<17} {:<2} {:<2} {:<6}'
 
         chart = f"```\n{header_format.format(*headers)}\n"
         message = ""
@@ -96,7 +96,7 @@ def standings():
         place = 1
             #[team , W, L, T, P]
         for r in row:
-            chart += f"{place:<4} {r[0]:<17} {r[1]:<2} {r[2]:<2} {r[5]:<6}\n"
+            chart += f"{place:<3} {r[0]:<17} {r[1]:<2} {r[2]:<2} {r[5]:<6}\n"
 
             if r[0] == "Uppercuts":
                 message += f"We are currently in {place}th place. Our spirit score is {r[5]}! KEEP IT UP!!"
