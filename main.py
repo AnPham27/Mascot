@@ -108,8 +108,35 @@ def run():
         await ctx.send(table)
         await ctx.send(message)
 
+    @bot.command(
+            help="I am still under development!",
+            description="Posting the playoffs",
+            brief="Posts the playoffs",
+            hidden=True
+    )
+    async def playoffs(ctx):
+        """ Answers with the standing for that day """
+        await playoff(ctx)
+   
+
+    async def playoff(ctx):
+        #channel = bot.get_channel(1112936855088943165)
+
+        #Thursday, June 22: our first game we are playing against DISCount Athletes wearing 
+        # White on Margaret # 5. In our second game, we are playing against Deborah wearing White on Margaret # 4.
+        
+        msg = "Thursday, June 29: our first game we are playing against **Huck Tales** wearing **White** on **Margaret # 6**. In our second game, we are playing against **5 Alive** wearing **Dark** on **Margaret # 7**."
+        table, message = standings()
+
+        await ctx.send(msg)
+        await ctx.send(table)
+        await ctx.send(message)
+
     bot.run(settings.DISCORD_API_SECRET)
     #bot.run("") for quick testing
+
+
+
 
 if __name__ == '__main__':
     run()
