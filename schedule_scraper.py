@@ -370,24 +370,35 @@ def get_upcoming_schedule(upcoming_date):
     # print(second)
 
 
-    #two cases if games are on separate fields 
-    # and if games are on the same field
-
+    #four cases:
+    # if games are on separate fields 
+    # if games are on the same field
+    # if first game is practice
+    # if second game is practice
 
     message = ""
 
-    #first game 
-    if first[1] == 'Dark':
-        message = f"{today_date}: our first game we are playing against **{dictionary[first[0][3]]}** wearing **{first[1]}** on **{first[0][1]}**. "
+    #first game
+    if first[0][1] == "Practice Area":
+        message = f"{today_date}: our first game we are practicing at **{first[0][1]}**."
+    
+    else:
+        #first game 
+        if first[1] == 'Dark':
+            message = f"{today_date}: our first game we are playing against **{dictionary[first[0][3]]}** wearing **{first[1]}** on **{first[0][1]}**. "
 
-    else:   
-        message = f"{today_date}: our first game we are playing against **{dictionary[first[0][2]]}** wearing **{first[1]}** on **{first[0][1]}**. "
+        else:   
+            message = f"{today_date}: our first game we are playing against **{dictionary[first[0][2]]}** wearing **{first[1]}** on **{first[0][1]}**. "
 
-    #second game
-    if second[1] == 'Dark':
-        message += f"In our second game, we are playing against **{dictionary[second[0][5]]}** wearing **{second[1]}** on **{second[0][1]}**. "
 
-    else:   
-        message += f"In our second game, we are playing against **{dictionary[second[0][4]]}** wearing **{second[1]}** on **{second[0][1]}**. "
+    if second[0][1] == "Practice Area":
+        message = f"In our second game, we are practicing at **{second[0][1]}**."
+    else:
+        #second game
+        if second[1] == 'Dark':
+            message += f"In our second game, we are playing against **{dictionary[second[0][5]]}** wearing **{second[1]}** on **{second[0][1]}**. "
+
+        else:   
+            message += f"In our second game, we are playing against **{dictionary[second[0][4]]}** wearing **{second[1]}** on **{second[0][1]}**. "
 
     return message  
