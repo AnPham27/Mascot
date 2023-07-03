@@ -201,7 +201,7 @@ def get_schedule():
 
 def get_upcoming_schedule(upcoming_date):
     try:
-        source = requests.get("https://data.perpetualmotion.org/allSports/schedule.php?leagueID=1957")
+        source = requests.get("https://data.perpetualmotion.org/allSports/schedule.php?leagueID=1984")
         #source = requests.get("https://data.perpetualmotion.org/web-app/standings/1955")
         source.raise_for_status()
 
