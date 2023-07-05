@@ -3,11 +3,12 @@ from bs4 import BeautifulSoup
 from datetime import date
 import calendar
 
+TEAM_NUM = 12
 
 def get_schedule():
     
     try:
-        source = requests.get("https://data.perpetualmotion.org/allSports/schedule.php?leagueID=1957")
+        source = requests.get("https://data.perpetualmotion.org/allSports/schedule.php?leagueID=1984")
         #source = requests.get("https://data.perpetualmotion.org/web-app/standings/1955")
         source.raise_for_status()
 
@@ -116,7 +117,7 @@ def get_schedule():
     flagged_arrays = []
 
     for sub_array in split_arrays:
-        if '4' in sub_array:
+        if f'{TEAM_NUM}' in sub_array:
             flagged_arrays.append(sub_array)
 
     #print(flagged_arrays)
@@ -141,10 +142,10 @@ def get_schedule():
     for i in range (len(current_games)):
         for j in range (len(current_games[0])):
 
-            if j < 4 and current_games[i][j] == '4':
+            if j < 4 and current_games[i][j] == f'{TEAM_NUM}':
                 first.append(current_games[i])
             
-            if j > 3 and current_games[i][j] == '4':
+            if j > 3 and current_games[i][j] == f'{TEAM_NUM}':
                 second.append(current_games[i])
 
         
@@ -155,19 +156,19 @@ def get_schedule():
     colour = ''
 
     #first game colour 
-    if '4' == first[0][2] or '4' == first[0][4]:
+    if f'{TEAM_NUM}' == first[0][2] or f'{TEAM_NUM}' == first[0][4]:
         colour = 'Dark'
         first.append(colour)
 
-    if '4' == first[0][3] or '4' == first[0][5]:
+    if f'{TEAM_NUM}' == first[0][3] or f'{TEAM_NUM}' == first[0][5]:
         colour = 'White'
         first.append(colour)
 
-    if '4' == second[0][2] or '4' == second[0][4]:
+    if f'{TEAM_NUM}' == second[0][2] or f'{TEAM_NUM}' == second[0][4]:
         colour = 'Dark'
         second.append(colour)
 
-    if '4' == second[0][3] or '4' == second[0][5]:
+    if f'{TEAM_NUM}' == second[0][3] or f'{TEAM_NUM}' == second[0][5]:
         colour = 'White'
         second.append(colour)
 
@@ -176,27 +177,33 @@ def get_schedule():
     # print(second)
 
 
-    #two cases if games are on separate fields 
-    # and if games are on the same field
-
+    #four cases:
+    # if games are on separate fields 
+    # if games are on the same field
+    # if first game is practice
+    # if second game is practice
 
     message = ""
 
-    #first game 
-    if first[1] == 'Dark':
-        message = f"@everyone {today_date}: our first game we are playing against **{dictionary[first[0][3]]}** wearing **{first[1]}** on **{first[0][1]}**. "
+    # First game
+    if first[0][1] != "Practice Area":
+        if first[1] == 'Dark':
+            message = f"{today_date}: our first game we are playing against **{dictionary[first[0][3]]}** wearing **{first[1]}** on **{first[0][1]}**. "
+        elif first[1] == 'White':
+            message = f"{today_date}: our first game we are playing against **{dictionary[first[0][2]]}** wearing **{first[1]}** on **{first[0][1]}**. "
+    else:
+        message = f"{today_date}: our first game we are practicing at **{first[0][1]}**."
 
-    else:   
-        message = f"@everyone {today_date}: our first game we are playing against **{dictionary[first[0][5]]}** wearing **{first[1]}** on **{first[0][1]}**. "
+    # Second game
+    if second[0][1] != "Practice Area":
+        if second[1] == 'Dark':
+            message += f"In our second game, we are playing against **{dictionary[second[0][5]]}** wearing **{second[1]}** on **{second[0][1]}**. "
+        elif second[1] == 'White':
+            message += f"In our second game, we are playing against **{dictionary[second[0][4]]}** wearing **{second[1]}** on **{second[0][1]}**. "
+    else:
+        message += f"In our second game, we are practicing at **{second[0][1]}**."
 
-    #second game
-    if second[1] == 'Dark':
-        message += f"In our second game, we are playing against **{dictionary[second[0][5]]}** wearing **{second[1]}** on **{second[0][1]}**. "
-
-    else:   
-        message += f"In our second game, we are playing against **{dictionary[second[0][4]]}** wearing **{second[1]}** on **{second[0][1]}**. "
-
-    return message  
+    return message   
 
 
 def get_upcoming_schedule(upcoming_date):
@@ -214,7 +221,7 @@ def get_upcoming_schedule(upcoming_date):
     # today = date.today()
     # d2 = today.strftime("%B %d")
     # today_date = f"{calendar.day_name[today.weekday()]}, {d2}"
-
+    
     today_date = upcoming_date
 
     number = soup.find("table", class_="teamlist f-small").find_all(id="team_num_cell")
@@ -233,10 +240,7 @@ def get_upcoming_schedule(upcoming_date):
 
 
     dictionary = dict(zip(numbers, teams))
-
-    #{'1': 'Butterfingers', '6': 'DISCount Athletes', '2': 'Hammerrhoids', '7': 'Huck Dynasty', '3': '5 Alive', 
-    # '8': 'Hammer Time', '4': 'Uppercuts', '9': 'Handle With Care', '5': 'Huck Tales', '10': 'Deborah'}
-
+    print(dictionary)
 
     #day = soup.find("table").find_all("th", id="week_header")
     day = soup.find("table", class_="schedWeek table table-condensed table-striped table-responsive f-small").find_all_next("th", id="week_header")
@@ -246,7 +250,7 @@ def get_upcoming_schedule(upcoming_date):
         days.append(i.text)
     
     
-    playoff = ["Thursday, June 29"]
+    playoff = ["Thursday, August 24"]
 
     if today_date in playoff:
         return(f"We have playoffs that day, and there is no schedule for that yet.")
@@ -256,14 +260,15 @@ def get_upcoming_schedule(upcoming_date):
         return(f"There are no games on {today_date}. Check for a different date")
     
 
-    #print(days)
+    print(days)
 
-    # nums =[]
-    # field_num = soup.find("tbody").find_all(id="field_name")
+    nums =[]
+    field_num = soup.find("tbody").find_all(id="field_name")
 
-    # for i in field_num:
-    #     nums.append(i.text)
+    for i in field_num:
+        nums.append(i.text)
 
+    print(nums)
 
     # left_team = soup.find("tbody").find_all_next("a")
     opponent = soup.find("tbody").find_all_next("a")
@@ -299,7 +304,8 @@ def get_upcoming_schedule(upcoming_date):
     # DATE, Field #, LEFT , RIGHT, LEFT, RIGHT 
     # 0  ,    1 ,     2,     3 ,    4 ,   5
     for i, group in enumerate(split_arrays):
-        group.insert(0, days[i // 5])
+
+        group.insert(0, days[i // 7])
 
     #print(split_arrays)
 
@@ -308,7 +314,7 @@ def get_upcoming_schedule(upcoming_date):
     flagged_arrays = []
 
     for sub_array in split_arrays:
-        if '4' in sub_array:
+        if f'{TEAM_NUM}' in sub_array:
             flagged_arrays.append(sub_array)
 
     #print(flagged_arrays)
@@ -335,10 +341,10 @@ def get_upcoming_schedule(upcoming_date):
     for i in range (len(current_games)):
         for j in range (len(current_games[0])):
 
-            if j < 4 and current_games[i][j] == '4':
+            if j < 4 and current_games[i][j] == f'{TEAM_NUM}':
                 first.append(current_games[i])
             
-            if j > 3 and current_games[i][j] == '4':
+            if j > 3 and current_games[i][j] == f'{TEAM_NUM}':
                 second.append(current_games[i])
 
         
@@ -349,25 +355,25 @@ def get_upcoming_schedule(upcoming_date):
     colour = ''
 
     #first game colour 
-    if '4' == first[0][2] or '4' == first[0][4]:
+    if f'{TEAM_NUM}' == first[0][2] or f'{TEAM_NUM}' == first[0][4]:
         colour = 'Dark'
         first.append(colour)
 
-    if '4' == first[0][3] or '4' == first[0][5]:
+    if f'{TEAM_NUM}' == first[0][3] or f'{TEAM_NUM}' == first[0][5]:
         colour = 'White'
         first.append(colour)
 
-    if '4' == second[0][2] or '4' == second[0][4]:
+    if f'{TEAM_NUM}' == second[0][2] or f'{TEAM_NUM}' == second[0][4]:
         colour = 'Dark'
         second.append(colour)
 
-    if '4' == second[0][3] or '4' == second[0][5]:
+    if f'{TEAM_NUM}' == second[0][3] or f'{TEAM_NUM}' == second[0][5]:
         colour = 'White'
         second.append(colour)
 
 
-    # print(first)
-    # print(second)
+    print(first)
+    print(second)
 
 
     #four cases:
@@ -378,27 +384,22 @@ def get_upcoming_schedule(upcoming_date):
 
     message = ""
 
-    #first game
-    if first[0][1] == "Practice Area":
-        message = f"{today_date}: our first game we are practicing at **{first[0][1]}**."
-    
-    else:
-        #first game 
+    # First game
+    if first[0][1] != "Practice Area":
         if first[1] == 'Dark':
             message = f"{today_date}: our first game we are playing against **{dictionary[first[0][3]]}** wearing **{first[1]}** on **{first[0][1]}**. "
-
-        else:   
+        elif first[1] == 'White':
             message = f"{today_date}: our first game we are playing against **{dictionary[first[0][2]]}** wearing **{first[1]}** on **{first[0][1]}**. "
-
-
-    if second[0][1] == "Practice Area":
-        message = f"In our second game, we are practicing at **{second[0][1]}**."
     else:
-        #second game
+        message = f"{today_date}: our first game we are practicing at **{first[0][1]}**."
+
+    # Second game
+    if second[0][1] != "Practice Area":
         if second[1] == 'Dark':
             message += f"In our second game, we are playing against **{dictionary[second[0][5]]}** wearing **{second[1]}** on **{second[0][1]}**. "
-
-        else:   
+        elif second[1] == 'White':
             message += f"In our second game, we are playing against **{dictionary[second[0][4]]}** wearing **{second[1]}** on **{second[0][1]}**. "
+    else:
+        message += f"In our second game, we are practicing at **{second[0][1]}**."
 
-    return message  
+    return message
