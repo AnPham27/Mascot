@@ -206,7 +206,7 @@ def wednesday_standings():
             if r[0] == "Frisbeeana Jones":
                 message += f"We are currently in {place}th place."
                 if r[5] == "N/A":
-                    message += f" Our spirit score is {r[5]} since it is our first game! Hang tight"
+                    message += f" Our spirit score is {r[5]} since it is our first game! Good luck!!"
                 else: 
                     message += f" Our spirit score is {r[5]}! KEEP IT UP!!"
             place += 1
