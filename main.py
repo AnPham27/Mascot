@@ -3,8 +3,8 @@ import discord
 from discord.ext import commands
 import random
 from datetime import date
-from standings_scraper import standings
-from schedule_scraper import get_schedule, get_upcoming_schedule
+from standings_scraper import standings, wednesday_standings
+from schedule_scraper import get_upcoming_schedule
 
 
 
@@ -20,35 +20,6 @@ def run():
     async def on_ready():
         logger.info(f"User: {bot.user} (ID: {bot.user.id})")
         #schedule.every().thursday.at("10:00").do(asyncio.run, send_weekly_message)
-
-
-    @bot.command(
-            help="I am still under development!",
-            description="Ping pong?",
-            brief="Ping pong!",
-            hidden=True
-    )
-
-
-    async def ping(ctx):
-        """ Answers with pong """
-        await ctx.send("pong")
-
-    @bot.command(
-            help="I am still under development!",
-            description="Posting the schedule",
-            brief="Posts the schedule",
-            hidden=True
-    )
-
-    async def schedule(ctx):
-        """ Answers with the schedule for that day """
-        await weekly_schedule(ctx)
-
-    async def weekly_schedule(ctx):
-        #channel = bot.get_channel(1112936855088943165)
-        await ctx.send(get_schedule())
-    
 
 
     @bot.command(
@@ -108,7 +79,22 @@ def run():
         await ctx.send(table)
         await ctx.send(message)
 
+    @bot.command(
+            help="I am still under development!",
+            description="Posting the standings for wednesdays",
+            brief="Posts the schedule",
+            hidden=True
+    )
+    async def standing_wed(ctx):
+        """ Answers with the standing for that day """
+        await weekly_standing(ctx)
+   
 
+    async def weekly_standing(ctx):
+        #channel = bot.get_channel(1112936855088943165)
+        table, message = wednesday_standings()
+        await ctx.send(table)
+        await ctx.send(message)
 
     # @bot.command(
     #         help="I am still under development!",
@@ -134,7 +120,7 @@ def run():
     #     await channel.send(message)
 
     bot.run(settings.DISCORD_API_SECRET)
-    #bot.run() #for quick testing
+    #bot.run("") #for quick testing
 
 
 
