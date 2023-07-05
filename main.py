@@ -1,25 +1,20 @@
 import settings
 import discord 
 from discord.ext import commands
-import random
 from datetime import date
 from standings_scraper import standings, wednesday_standings
 from schedule_scraper import get_upcoming_schedule
 
 
-
-#filename = "schedule.txt"
 logger = settings.logging.getLogger("bot")
 
 def run():
     intents = discord.Intents.default()
-
     bot = commands.Bot(command_prefix="!", intents=intents)
-
     @bot.event
     async def on_ready():
         logger.info(f"User: {bot.user} (ID: {bot.user.id})")
-        #schedule.every().thursday.at("10:00").do(asyncio.run, send_weekly_message)
+
 
 
     @bot.command(
@@ -29,7 +24,7 @@ def run():
             hidden=True
     )
     async def upcoming_schedule(ctx, date1, date2, date3):
-        """ Answers with the schedule for that day """
+        """ Answers with the schedule for given day in format: !upcoming_schedule Thursday, July 5 """
         day = f"{date1} {date2} {date3}"
         await next_schedule(ctx, day)
 
@@ -40,6 +35,7 @@ def run():
         await ctx.send(message)
 
 
+
     @bot.command(
             help="I am still under development!",
             description="Posting the schedule",
@@ -47,7 +43,7 @@ def run():
             hidden=True
     )
     async def upcoming(ctx, date1, date2, date3):
-        """ @EVERYONE the schedule for the day and the standing """
+        """ @EVERYONE in announcements with the schedule and current standings: Format: !upcoming Thursday, July 5 """
         day = f"{date1} {date2} {date3}"
         await everyone_schedule(ctx, day)
 
@@ -62,6 +58,8 @@ def run():
         await channel.send(table)
         await channel.send(msg)
 
+
+
     @bot.command(
             help="I am still under development!",
             description="Posting the schedule",
@@ -69,15 +67,15 @@ def run():
             hidden=True
     )
     async def standing(ctx):
-        """ Answers with the standing for that day """
+        """ Answers/replies with the standing for Thursdays games """
         await weekly_standing(ctx)
-   
 
     async def weekly_standing(ctx):
-        #channel = bot.get_channel(1112936855088943165)
         table, message = standings()
         await ctx.send(table)
         await ctx.send(message)
+
+
 
     @bot.command(
             help="I am still under development!",
@@ -86,38 +84,15 @@ def run():
             hidden=True
     )
     async def standing_wed(ctx):
-        """ Answers with the standing for that day """
+        """ Answers with the standing for the Wedesday league """
         await wednesday_standing(ctx)
    
-
     async def wednesday_standing(ctx):
         #channel = bot.get_channel(1112936855088943165)
         table, message = wednesday_standings()
         await ctx.send(table)
         await ctx.send(message)
 
-    # @bot.command(
-    #         help="I am still under development!",
-    #         description="Posting the playoffs",
-    #         brief="Posts the playoffs",
-    #         hidden=True
-    # )
-    # async def playoffs(ctx):
-    #     """ Answers with the standing for that day """
-    #     await playoff(ctx)
-   
-    # async def playoff(ctx):
-    #     channel = bot.get_channel(1109852414972010586)
-
-    #     #Thursday, June 22: our first game we are playing against DISCount Athletes wearing 
-    #     # White on Margaret # 5. In our second game, we are playing against Deborah wearing White on Margaret # 4.
-
-    #     msg = "@everyone Thursday, June 29: our first game we are playing against **Huck Tales** wearing **White** on **Margaret # 6**. In our second game, we are playing against **5 Alive** wearing **Dark** on **Margaret # 7**."
-    #     table, message = standings()
-
-    #     await channel.send(msg)
-    #     await channel.send(table)
-    #     await channel.send(message)
 
     bot.run(settings.DISCORD_API_SECRET)
     #bot.run("") #for quick testing
