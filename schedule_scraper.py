@@ -391,18 +391,18 @@ def get_upcoming_schedule(upcoming_date):
         # First game
         if first[0][1] != "Practice Area":
             if first[1] == 'Dark':
-                message = f"{today_date}: our first game we are playing against **{dictionary[first[0][3]]}** wearing **{first[1]}** on **{first[0][1]}**. "
+                message = f"{today_date}: our first game we are playing against **{dictionary[first[0][3]].strip()}** wearing **{first[1]}** on **{first[0][1]}**. "
             elif first[1] == 'White':
-                message = f"{today_date}: our first game we are playing against **{dictionary[first[0][2]]}** wearing **{first[1]}** on **{first[0][1]}**. "
+                message = f"{today_date}: our first game we are playing against **{dictionary[first[0][2]].strip()}** wearing **{first[1]}** on **{first[0][1]}**. "
         else:
             message = f"{today_date}: our first game we are practicing at **{first[0][1]}**."
 
         # Second game
         if second[0][1] != "Practice Area":
             if second[1] == 'Dark':
-                message += f"In our second game, we are playing against **{dictionary[second[0][5]]}** wearing **{second[1]}** on **{second[0][1]}**. "
+                message += f"In our second game, we are playing against **{dictionary[second[0][5]].strip()}** wearing **{second[1]}** on **{second[0][1]}**. "
             elif second[1] == 'White':
-                message += f"In our second game, we are playing against **{dictionary[second[0][4]]}** wearing **{second[1]}** on **{second[0][1]}**. "
+                message += f"In our second game, we are playing against **{dictionary[second[0][4]].strip()}** wearing **{second[1]}** on **{second[0][1]}**. "
         else:
             message += f"In our second game, we are practicing at **{second[0][1]}**."
 
@@ -411,7 +411,7 @@ def get_upcoming_schedule(upcoming_date):
 
 
 
-    if "Wednesday" in upcoming_date:
+    else:
             
         try:
             source = requests.get("https://data.perpetualmotion.org/allSports/schedule.php?leagueID=1982")
@@ -595,18 +595,18 @@ def get_upcoming_schedule(upcoming_date):
         # First game
         if first[0][1] != "Practice Area":
             if first[1] == 'Dark':
-                message = f"{today_date}: our first game we are playing against **{dictionary[first[0][3]]}** wearing **{first[1]}** on **{first[0][1]}**. "
+                message = f"{today_date}: our first game we are playing against **{dictionary[first[0][3]].strip()}** wearing **{first[1]}** on **{first[0][1]}**. "
             elif first[1] == 'White':
-                message = f"{today_date}: our first game we are playing against **{dictionary[first[0][2]]}** wearing **{first[1]}** on **{first[0][1]}**. "
+                message = f"{today_date}: our first game we are playing against **{dictionary[first[0][2]].strip()}** wearing **{first[1]}** on **{first[0][1]}**. "
         else:
             message = f"{today_date}: our first game we are practicing at **{first[0][1]}**."
 
         # Second game
         if second[0][1] != "Practice Area":
             if second[1] == 'Dark':
-                message += f"In our second game, we are playing against **{dictionary[second[0][5]]}** wearing **{second[1]}** on **{second[0][1]}**. "
+                message += f"In our second game, we are playing against **{dictionary[second[0][5]].strip()}** wearing **{second[1]}** on **{second[0][1]}**. "
             elif second[1] == 'White':
-                message += f"In our second game, we are playing against **{dictionary[second[0][4]]}** wearing **{second[1]}** on **{second[0][1]}**. "
+                message += f"In our second game, we are playing against **{dictionary[second[0][4]].strip()}** wearing **{second[1]}** on **{second[0][1]}**. "
         else:
             message += f"In our second game, we are practicing at **{second[0][1]}**."
 

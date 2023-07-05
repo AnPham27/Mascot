@@ -108,6 +108,8 @@ def run():
         await ctx.send(table)
         await ctx.send(message)
 
+
+
     # @bot.command(
     #         help="I am still under development!",
     #         description="Posting the playoffs",
@@ -132,7 +134,7 @@ def run():
     #     await channel.send(message)
 
     bot.run(settings.DISCORD_API_SECRET)
-    #bot.run("") #for quick testing
+    #bot.run() #for quick testing
 
 
 
