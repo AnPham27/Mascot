@@ -19,7 +19,7 @@ def standings():
     names = []
 
     for i in teams:
-        names.append((i.text).replace("The ",'').replace("Birthday", "Bday"))
+        names.append((i.text).replace("The ",'').replace("Birthday", "Bday").replace("With", "W/"))
 
 
     scores = soup.find("tbody").find_all("td", class_="text-center")
@@ -127,7 +127,7 @@ def wednesday_standings():
     names = []
 
     for i in teams:
-        names.append((i.text).replace("The ",'').replace("Birthday", "Bday"))
+        names.append((i.text).replace("The ",'').replace("Birthday", "Bday").replace("With", "W/"))
 
 
     scores = soup.find("tbody").find_all("td", class_="text-center")
