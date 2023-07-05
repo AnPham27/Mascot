@@ -52,8 +52,8 @@ def run():
         await everyone_schedule(ctx, day)
 
     async def everyone_schedule(ctx, day):
-        #channel = bot.get_channel(1109852414972010586) #@ main channel
-        channel = bot.get_channel(1112936855088943165) #@ bot testing channel
+        channel = bot.get_channel(1109852414972010586) #@ main channel
+        #channel = bot.get_channel(1112936855088943165) #@ bot testing channel
         message = f"@everyone {get_upcoming_schedule(day)}"
 
         table, msg = standings()
