@@ -19,7 +19,8 @@ def standings():
     names = []
 
     for i in teams:
-        names.append((i.text).replace("The ",''))
+        names.append((i.text).replace("The ",'').replace("Birthday", "Bday"))
+
 
     scores = soup.find("tbody").find_all("td", class_="text-center")
 
@@ -60,7 +61,7 @@ def standings():
         place = 1
             #[team , W, L, T, P]
         for r in row:
-            chart += f"{place:<3} {r[0]:<17} {r[1]:<2} {r[2]:<2} {r[4]:<6}\n"
+            chart += f"{place:<3} {r[0][:17].strip():<17} {r[1]:<2} {r[2]:<2} {r[4]:<6}\n"
 
             if r[0] == "Uppercuts":
                 message += f"We are currently in {place}th place. Our spirit score is still being calculated. KEEP IT UP!!"
@@ -96,7 +97,7 @@ def standings():
         place = 1
             #[team , W, L, T, P]
         for r in row:
-            chart += f"{place:<3} {r[0]:<17} {r[1]:<2} {r[2]:<2} {r[5]:<6}\n"
+            chart += f"{place:<3} {r[0][:17].strip():<17} {r[1]:<2} {r[2]:<2} {r[5]:<6}\n"
 
             if r[0] == "Uppercuts":
                 message += f"We are currently in {place}th place. Our spirit score is {r[5]}! KEEP IT UP!!"
@@ -104,8 +105,6 @@ def standings():
         chart += "```"
     
     return(chart, message)
-
-
 
 
 
