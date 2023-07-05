@@ -87,10 +87,10 @@ def run():
     )
     async def standing_wed(ctx):
         """ Answers with the standing for that day """
-        await weekly_standing(ctx)
+        await wednesday_standing(ctx)
    
 
-    async def weekly_standing(ctx):
+    async def wednesday_standing(ctx):
         #channel = bot.get_channel(1112936855088943165)
         table, message = wednesday_standings()
         await ctx.send(table)
