@@ -16,10 +16,14 @@ def standings():
 
 
     teams = soup.find("tbody").find_all("a")
+
+    waiting = False
     names = []
 
     for i in teams:
         names.append((i.text).replace("The ",'').replace("Birthday", "Bday").replace("With", "W/"))
+        if "**" in i.next_sibling:
+            waiting = True
 
 
     scores = soup.find("tbody").find_all("td", class_="text-center")
@@ -65,6 +69,9 @@ def standings():
 
             if r[0] == "Uppercuts":
                 message += f"We are currently in {place}th place. Our spirit score is still being calculated. KEEP IT UP!!"
+
+                if waiting == True:
+                    message+= "Not all scores have been submitted at this moment."
             place += 1
         chart += "```"
 
