@@ -21,9 +21,9 @@ def standings():
     names = []
 
     for i in teams:
-        names.append((i.text).replace("The ",'').replace("Birthday", "Bday").replace("With", "W/"))
+        names.append((i.text).replace("The ", '').replace("Birthday", "Bday").replace("With", "W/"))
         next_element = i.find_next()
-        if next_element is not None and " ** " in next_element:
+        if " ** " in next_element:
             waiting = True
 
 
