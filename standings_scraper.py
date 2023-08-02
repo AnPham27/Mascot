@@ -22,11 +22,13 @@ def standings():
 
     for i in teams:
         names.append((i.text).replace("The ", '').replace("Birthday", "Bday").replace("With", "W/"))
-        next_element = i.find_next()
-        if " ** " in next_element:
+        
+        next_element = i.next_sibling.strip()
+        #print(next_element)
+        if "**" in next_element:
             waiting = True
 
-
+    
     scores = soup.find("tbody").find_all("td", class_="text-center")
 
     point = []
@@ -72,7 +74,7 @@ def standings():
                 message += f"We are currently in {place}th place. Our spirit score is still being calculated. KEEP IT UP!!"
 
                 if waiting == True:
-                    message+= "Not all scores have been submitted at this moment."
+                    message+= "Please note: Not all scores have been submitted at this moment. Check again later!"
             place += 1
         chart += "```"
 
@@ -113,6 +115,9 @@ def standings():
                     message += f" Our spirit score is {r[5]} since it is our first game! Good luck!!"
                 else: 
                     message += f" Our spirit score is {r[5]}! KEEP IT UP!!"
+                
+                if waiting == True:
+                    message += "\nPlease note: Not all scores have been submitted at this moment. Please check again later!"
             place += 1
         chart += "```"
     
@@ -133,10 +138,14 @@ def wednesday_standings():
 
     teams = soup.find("tbody").find_all("a")
     names = []
+    waiting = False
 
     for i in teams:
         names.append((i.text).replace("The ",'').replace("Birthday", "Bday").replace("With", "W/"))
-
+        next_element = i.next_sibling.strip()
+        #print(next_element)
+        if "**" in next_element:
+            waiting = True
 
     scores = soup.find("tbody").find_all("td", class_="text-center")
 
@@ -151,7 +160,7 @@ def wednesday_standings():
     #no spirit score yet ~ less than 24 hours
     if len(point) == (len(names) * 4):
         count = 0
-        total_num_scores = 4
+        total_num_scores = 6
         total_scores = len(names) * total_num_scores
         result = []
 
@@ -181,13 +190,16 @@ def wednesday_standings():
 
             if r[0] == "Frisbeeana Jones":
                 message += f"We are currently in {place}th place. Our spirit score is still being calculated. KEEP IT UP!!"
+                
+                if waiting == True:
+                    message+= "Please note: Not all scores have been submitted at this moment. Check again later!"
             place += 1
         chart += "```"
 
     #spirit points are available
     else:
         count = 0
-        total_num_scores = 5
+        total_num_scores = 6
         total_scores = len(names) * total_num_scores
         result = []
 
@@ -213,14 +225,17 @@ def wednesday_standings():
         place = 1
             #[team , W, L, T, P]
         for r in row:
-            chart += f"{place:<3} {r[0][:17].strip():<17} {r[1]:<2} {r[2]:<2} {r[5]:<6}\n"
+            chart += f"{place:<3} {r[0][:17].strip():<17} {r[1]:<2} {r[2]:<2} {r[6]:<6}\n"
 
             if r[0] == "Frisbeeana Jones":
                 message += f"We are currently in {place}th place."
                 if r[5] == "N/A":
-                    message += f" Our spirit score is {r[5]} since it is our first game! Good luck!!"
+                    message += f" Our spirit score is {r[6]} since it is our first game! Good luck!!"
                 else: 
-                    message += f" Our spirit score is {r[5]}! KEEP IT UP!!"
+                    message += f" Our spirit score is {r[6]}! KEEP IT UP!!"
+
+                if waiting == True:
+                    message+= "Please note: Not all scores have been submitted at this moment. Check again later!"
             place += 1
         chart += "```"
     
