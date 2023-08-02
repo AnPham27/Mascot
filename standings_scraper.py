@@ -22,7 +22,7 @@ def standings():
 
     for i in teams:
         names.append((i.text).replace("The ",'').replace("Birthday", "Bday").replace("With", "W/"))
-        if "**" in i.next_sibling:
+        if " ** " in i.next_sibling:
             waiting = True
 
 
