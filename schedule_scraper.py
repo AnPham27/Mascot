@@ -133,7 +133,7 @@ def get_upcoming_schedule(upcoming_date):
         #print("MEEP")
 
         #print(current_games)
-        #
+        #[['Thursday, August 10', 'Margaret # 4', '1', '12', '12', '9'], 'Dark', 'White']
         # DATE, Field #, LEFT , RIGHT, LEFT, RIGHT 
         # 0  ,    1 ,     2,     3 ,    4 ,   5
 
@@ -158,26 +158,30 @@ def get_upcoming_schedule(upcoming_date):
         second_colour = ''
 
         #first game colour 
-        if f'{TEAM_NUM}' == first[0][2] or f'{TEAM_NUM}' == first[0][4]:
+        if f'{TEAM_NUM}' == first[0][2]:
             colour = 'Dark'
             first.append(colour)
 
-        if f'{TEAM_NUM}' == first[0][3] or f'{TEAM_NUM}' == first[0][5]:
+        if f'{TEAM_NUM}' == first[0][3]:
             colour = 'White'
             first.append(colour)
+        
+        #second game colour
 
-        if f'{TEAM_NUM}' == second[0][2] or f'{TEAM_NUM}' == second[0][4]:
+        if f'{TEAM_NUM}' == second[0][4]:
             second_colour = 'Dark'
             second.append(second_colour)
 
-        if f'{TEAM_NUM}' == second[0][3] or f'{TEAM_NUM}' == second[0][5]:
+        if f'{TEAM_NUM}' == second[0][5]:
             second_colour = 'White'
             second.append(second_colour)
 
 
         print(first)
         print(second)
-
+        #[['Thursday, August 10', 'Margaret # 4', '1', '12', '12', '9'], 'Dark', 'White']
+        # DATE, Field #, LEFT , RIGHT, LEFT, RIGHT 
+        # 0  ,    1 ,     2,     3 ,    4 ,   5
 
         #four cases:
         # if games are on separate fields 
@@ -362,19 +366,21 @@ def get_upcoming_schedule(upcoming_date):
         colour = ''
         second_colour = ''
         #first game colour 
-        if f'{TEAM_NUM}' == first[0][2] or f'{TEAM_NUM}' == first[0][4]:
+        if f'{TEAM_NUM}' == first[0][2]:
             colour = 'Dark'
             first.append(colour)
 
-        if f'{TEAM_NUM}' == first[0][3] or f'{TEAM_NUM}' == first[0][5]:
+        if f'{TEAM_NUM}' == first[0][3]:
             colour = 'White'
             first.append(colour)
+        
+        #second game colour
 
-        if f'{TEAM_NUM}' == second[0][2] or f'{TEAM_NUM}' == second[0][4]:
+        if f'{TEAM_NUM}' == second[0][4]:
             second_colour = 'Dark'
             second.append(second_colour)
 
-        if f'{TEAM_NUM}' == second[0][3] or f'{TEAM_NUM}' == second[0][5]:
+        if f'{TEAM_NUM}' == second[0][5]:
             second_colour = 'White'
             second.append(second_colour)
 
