@@ -52,7 +52,7 @@ def get_upcoming_schedule(upcoming_date):
             days.append(i.text)
         
         
-        playoff = ["Thursday, August 24"]
+        playoff = ["Thursday, August 31"]
 
         if today_date in playoff:
             return(f"We have playoffs that day, and there is no schedule for that yet.")
@@ -155,6 +155,7 @@ def get_upcoming_schedule(upcoming_date):
 
 
         colour = ''
+        second_colour = ''
 
         #first game colour 
         if f'{TEAM_NUM}' == first[0][2] or f'{TEAM_NUM}' == first[0][4]:
@@ -166,12 +167,12 @@ def get_upcoming_schedule(upcoming_date):
             first.append(colour)
 
         if f'{TEAM_NUM}' == second[0][2] or f'{TEAM_NUM}' == second[0][4]:
-            colour = 'Dark'
-            second.append(colour)
+            second_colour = 'Dark'
+            second.append(second_colour)
 
         if f'{TEAM_NUM}' == second[0][3] or f'{TEAM_NUM}' == second[0][5]:
-            colour = 'White'
-            second.append(colour)
+            second_colour = 'White'
+            second.append(second_colour)
 
 
         print(first)
@@ -210,7 +211,7 @@ def get_upcoming_schedule(upcoming_date):
 
 
     else:
-            
+        #for Wednesdays
         try:
             source = requests.get("https://data.perpetualmotion.org/allSports/schedule.php?leagueID=1982")
             #source = requests.get("https://data.perpetualmotion.org/web-app/standings/1955")
@@ -256,7 +257,7 @@ def get_upcoming_schedule(upcoming_date):
             days.append(i.text)
         
         
-        playoff = ["Thursday, August 24"]
+        playoff = ["Wednesday, August 23"]
 
         if today_date in playoff:
             return(f"We have playoffs that day, and there is no schedule for that yet.")
@@ -359,7 +360,7 @@ def get_upcoming_schedule(upcoming_date):
 
 
         colour = ''
-
+        second_colour = ''
         #first game colour 
         if f'{TEAM_NUM}' == first[0][2] or f'{TEAM_NUM}' == first[0][4]:
             colour = 'Dark'
@@ -370,12 +371,12 @@ def get_upcoming_schedule(upcoming_date):
             first.append(colour)
 
         if f'{TEAM_NUM}' == second[0][2] or f'{TEAM_NUM}' == second[0][4]:
-            colour = 'Dark'
-            second.append(colour)
+            second_colour = 'Dark'
+            second.append(second_colour)
 
         if f'{TEAM_NUM}' == second[0][3] or f'{TEAM_NUM}' == second[0][5]:
-            colour = 'White'
-            second.append(colour)
+            second_colour = 'White'
+            second.append(second_colour)
 
 
         print(first)
