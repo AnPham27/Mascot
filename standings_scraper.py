@@ -186,7 +186,7 @@ def wednesday_standings():
         place = 1
             #[team , W, L, T, P]
         for r in row:
-            chart += f"{place:<3} {r[0][:17].strip():<17} {r[1]:<2} {r[2]:<2} {r[4]:<6}\n"
+            chart += f"{place:<3} {r[0][:17].strip():<17} {r[1]:<2} {r[2]:<2} {r[3]:<6}\n"
 
             if r[0] == "Frisbeeana Jones":
                 message += f"We are currently in {place}th place. Our spirit score is still being calculated. KEEP IT UP!!"
@@ -225,14 +225,14 @@ def wednesday_standings():
         place = 1
             #[team , W, L, T, P]
         for r in row:
-            chart += f"{place:<3} {r[0][:17].strip():<17} {r[1]:<2} {r[2]:<2} {r[6]:<6}\n"
+            chart += f"{place:<3} {r[0][:17].strip():<17} {r[1]:<2} {r[2]:<2} {r[5]:<6}\n"
 
             if r[0] == "Frisbeeana Jones":
                 message += f"We are currently in {place}th place."
                 if r[5] == "N/A":
-                    message += f" Our spirit score is {r[6]} since it is our first game! Good luck!!"
+                    message += f" Our spirit score is {r[5]} since it is our first game! Good luck!!"
                 else: 
-                    message += f" Our spirit score is {r[6]}! KEEP IT UP!!"
+                    message += f" Our spirit score is {r[5]}! KEEP IT UP!!"
 
                 if waiting == True:
                     message+= "Please note: Not all scores have been submitted at this moment. Check again later!"
