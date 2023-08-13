@@ -109,8 +109,8 @@ def run():
         await ctx.send(statement)
 
     
-    #bot.run(settings.DISCORD_API_SECRET)
-    bot.run("MTExMDMwMDQyNzgyOTkxNTgwMA.GbzZvX.NUAHULX4zPMCLgXCYOr70lCVRLClyZ_kJZIbvE") #for quick testing
+    bot.run(settings.DISCORD_API_SECRET)
+    #bot.run("") #for quick testing
 
 
 
