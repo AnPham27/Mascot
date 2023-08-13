@@ -4,6 +4,7 @@ from discord.ext import commands
 from datetime import date
 from standings_scraper import standings, wednesday_standings
 from schedule_scraper import get_upcoming_schedule
+from field_status import status
 
 
 logger = settings.logging.getLogger("bot")
@@ -23,7 +24,7 @@ def run():
             brief="Posts the schedule",
             hidden=True
     )
-    async def upcoming_schedule(ctx, date1, date2, date3):
+    async def upc(ctx, date1, date2, date3):
         """ Answers with the schedule for given day in format: !upcoming_schedule Thursday, July 5 """
         day = f"{date1} {date2} {date3}"
         await next_schedule(ctx, day)
@@ -42,7 +43,7 @@ def run():
             brief="Posts the schedule",
             hidden=True
     )
-    async def upcoming(ctx, date1, date2, date3):
+    async def to_all(ctx, date1, date2, date3):
         """ @EVERYONE in announcements with the schedule and current standings: Format: !upcoming Thursday, July 5 """
         day = f"{date1} {date2} {date3}"
         await everyone_schedule(ctx, day)
@@ -66,7 +67,7 @@ def run():
             brief="Posts the schedule",
             hidden=True
     )
-    async def standing(ctx):
+    async def st(ctx):
         """ Answers/replies with the standing for Thursdays games """
         await weekly_standing(ctx)
 
@@ -83,7 +84,7 @@ def run():
             brief="Posts the schedule",
             hidden=True
     )
-    async def standing_wed(ctx):
+    async def st_wed(ctx):
         """ Answers with the standing for the Wedesday league """
         await wednesday_standing(ctx)
    
@@ -92,10 +93,24 @@ def run():
         table, message = wednesday_standings()
         await ctx.send(table)
         await ctx.send(message)
+    
 
+    @bot.command(
+            help="I am still under development!",
+            description="Posting the standings for wednesdays",
+            brief="Posts the schedule",
+            hidden=True
+    )
+    async def field(ctx):
+        await field_status(ctx)
 
-    bot.run(settings.DISCORD_API_SECRET)
-    #bot.run("") #for quick testing
+    async def field_status(ctx):
+        statement = status()
+        await ctx.send(statement)
+
+    
+    #bot.run(settings.DISCORD_API_SECRET)
+    bot.run("MTExMDMwMDQyNzgyOTkxNTgwMA.GbzZvX.NUAHULX4zPMCLgXCYOr70lCVRLClyZ_kJZIbvE") #for quick testing
 
 
 
