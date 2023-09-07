@@ -7,7 +7,7 @@ import calendar
 def get_upcoming_schedule(upcoming_date):
 
     if "Thursday" in upcoming_date:
-        TEAM_NUM = 12
+        TEAM_NUM = 4
     
         try:
             source = requests.get("https://data.perpetualmotion.org/allSports/schedule.php?leagueID=2011")
@@ -42,17 +42,19 @@ def get_upcoming_schedule(upcoming_date):
 
 
         dictionary = dict(zip(numbers, teams))
-        print(dictionary)
+        #print(dictionary)
 
         #day = soup.find("table").find_all("th", id="week_header")
         day = soup.find("table", class_="schedWeek table table-condensed table-striped table-responsive f-small").find_all_next("th", id="week_header")
         days = []
 
+
+
         for i in day:
             days.append(i.text)
         
         
-        playoff = ["Thursday, August 31"]
+        playoff = ["Thursday, October 5"]
 
         if today_date in playoff:
             return(f"We have playoffs that day, and there is no schedule for that yet.")
@@ -62,7 +64,7 @@ def get_upcoming_schedule(upcoming_date):
             return(f"There are no games on {today_date}. Check for a different date")
         
 
-        print(days)
+        #print(days)
 
         nums =[]
         field_num = soup.find("tbody").find_all(id="field_name")
@@ -70,7 +72,7 @@ def get_upcoming_schedule(upcoming_date):
         for i in field_num:
             nums.append(i.text)
 
-        print(nums)
+        #print(nums)
 
         # left_team = soup.find("tbody").find_all_next("a")
         opponent = soup.find("tbody").find_all_next("a")
@@ -140,6 +142,14 @@ def get_upcoming_schedule(upcoming_date):
         first = []
         second = []
 
+        #find the times of each game and append it. 
+        game_header = soup.find_all(id='game_header')
+        times = []
+        for i in game_header:
+            times.append(i.text)
+        print(times)   
+
+
         for i in range (len(current_games)):
             for j in range (len(current_games[0])):
 
@@ -179,7 +189,7 @@ def get_upcoming_schedule(upcoming_date):
 
         print(first)
         print(second)
-        #[['Thursday, August 10', 'Margaret # 4', '1', '12', '12', '9'], 'Dark', 'White']
+        #[['Thursday, August 10', 'Margaret # 4', '1', '12', '12', '9'], 'Dark', 'White', time]
         # DATE, Field #, LEFT , RIGHT, LEFT, RIGHT 
         # 0  ,    1 ,     2,     3 ,    4 ,   5
 
@@ -385,8 +395,8 @@ def get_upcoming_schedule(upcoming_date):
             second.append(second_colour)
 
 
-        print(first)
-        print(second)
+        #print(first)
+        #print(second)
 
 
         #four cases:
