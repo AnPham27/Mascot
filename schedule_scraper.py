@@ -10,7 +10,7 @@ def get_upcoming_schedule(upcoming_date):
         TEAM_NUM = 12
     
         try:
-            source = requests.get("https://data.perpetualmotion.org/allSports/schedule.php?leagueID=1984")
+            source = requests.get("https://data.perpetualmotion.org/allSports/schedule.php?leagueID=2011")
             #source = requests.get("https://data.perpetualmotion.org/web-app/standings/1955")
             source.raise_for_status()
 

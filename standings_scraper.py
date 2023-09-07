@@ -4,7 +4,7 @@ from bs4 import BeautifulSoup
 
 def standings():
     try:
-        source = requests.get("https://data.perpetualmotion.org/web-app/standings/1984")
+        source = requests.get("https://data.perpetualmotion.org/allSports/schedule.php?leagueID=2011")
         source.raise_for_status()
 
         soup = BeautifulSoup(source.text, 'html.parser')
