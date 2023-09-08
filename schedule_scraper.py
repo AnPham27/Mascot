@@ -207,15 +207,33 @@ def get_upcoming_schedule(upcoming_date):
                 message = f"{today_date}: our first game we are playing against **{dictionary[first[0][3]].strip()}** wearing **{first[1]}** on **{first[0][1]}**. "
             elif first[1] == 'White':
                 message = f"{today_date}: our first game we are playing against **{dictionary[first[0][2]].strip()}** wearing **{first[1]}** on **{first[0][1]}**. "
+    
+            if today_date == "Thursday, September 14":
+                message += "Our first game starts at **6:15 PM**. "
+
+            elif today_date == "Thursday, September 21":
+                message += "Our first game starts at **8:30 PM**. "
+            else:
+                message += "Our first game starts at **6:30 PM**. "
+
         else:
             message = f"{today_date}: our first game we are practicing at **{first[0][1]}**."
 
         # Second game
         if second[0][1] != "Practice Area":
+
             if second[1] == 'Dark':
                 message += f"In our second game, we are playing against **{dictionary[second[0][5]].strip()}** wearing **{second[1]}** on **{second[0][1]}**. "
             elif second[1] == 'White':
                 message += f"In our second game, we are playing against **{dictionary[second[0][4]].strip()}** wearing **{second[1]}** on **{second[0][1]}**. "
+        
+            if today_date == "Thursday, September 14":
+                message += "Our second game starts at **7:05 PM**."
+            elif today_date == "Thursday, September 21":
+                message += "Our second game starts at **9:20 PM**."
+            else:
+                message += "Our second game starts at **7:20 PM**."            
+        
         else:
             message += f"In our second game, we are practicing at **{second[0][1]}**."
 
