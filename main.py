@@ -10,10 +10,12 @@ from field_status import status
 logger = settings.logging.getLogger("bot")
 
 def run():
-    intents = discord.Intents.default()
+    intents = discord.Intents.all()
     bot = commands.Bot(command_prefix="!", intents=intents)
+
     @bot.event
     async def on_ready():
+        print(f"{bot.user} is Ready")
         logger.info(f"User: {bot.user} (ID: {bot.user.id})")
 
 
@@ -27,6 +29,7 @@ def run():
     async def upc(ctx, date1, date2, date3):
         """ Answers with the schedule for given day in format: !upcoming_schedule Thursday, July 5 """
         day = f"{date1} {date2} {date3}"
+        print(day)
         await next_schedule(ctx, day)
 
     async def next_schedule(ctx,day):
@@ -108,6 +111,7 @@ def run():
         statement = status()
         await ctx.send(statement)
 
+    
     
     bot.run(settings.DISCORD_API_SECRET)
     #bot.run("") #for quick testing
