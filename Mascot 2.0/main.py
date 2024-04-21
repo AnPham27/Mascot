@@ -42,7 +42,7 @@ def run():
     async def st(ctx, division):
         """ Current standing to the same channel: 
         FORMAT: !st c2"""
-        table, message = standings(division)
+        table, message = standings(division.lower().replace(' ', ''))
         await ctx.send(table)
         await ctx.send(message)
 

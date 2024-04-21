@@ -1,14 +1,6 @@
 import requests
 from bs4 import BeautifulSoup
 
-def get_id(dictionary, division):
-  
-
-
-
-    return 
-    
-
 
 
 def standings(division):
@@ -17,10 +9,10 @@ def standings(division):
 
     dictionary = dict(zip(divisions, url_id))
 
-    get_id(dictionary, division)
+    url = "https://data.perpetualmotion.org/web-app/standings/" + dict[division]
 
     try:
-        source = requests.get("https://data.perpetualmotion.org/web-app/standings/2011")
+        source = requests.get(url)
         source.raise_for_status()
 
         soup = BeautifulSoup(source.text, 'html.parser')
@@ -53,8 +45,6 @@ def standings(division):
 
     for i in scores:
         point.append(i.text)
-
-  
         
     #no spirit score yet ~ less than 24 hours
 
