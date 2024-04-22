@@ -23,11 +23,11 @@ def run():
             brief="Posts the schedule",
             hidden=True
     )
-    async def upc(ctx, day, month, date, team_num):
+    async def upc(ctx, division, day, month, date, team_num):
         """ Upcoming schedule to same channel: 
-        FORMAT: !upc Thursday, July 5 4"""
+        FORMAT: !upc c2 Thursday, July 5 4"""
         
-        message = get_upcoming_schedule(day, month, date, team_num)
+        message = get_upcoming_schedule(division, day, month, date, team_num)
 
         await ctx.send(message)
         
