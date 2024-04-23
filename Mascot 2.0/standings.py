@@ -5,7 +5,7 @@ from bs4 import BeautifulSoup
 
 def standings(division):
     divisions = ["b7", "c", "b2", "c", "b2/c1", "c2"]
-    url_id = []
+    url_id = [2037, 2045, 2051, 2052, 2057, 2058]
 
     dictionary = dict(zip(divisions, url_id))
 
