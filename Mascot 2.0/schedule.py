@@ -7,12 +7,12 @@ import calendar
 def get_upcoming_schedule(division, day, month, date, team_num):
 
     divisions = ["b7", "ct", "b2", "c", "b2/c1", "c2"]
-    url_id = [2037, 2045, 2051, 2052, 2057, 2058]
-
+    #url_id = [2037, 2045, 2051, 2052, 2057, 2058]
+    url_id = [2037, 2045, 2051, 2052, 2057, 2011]
     dictionary = dict(zip(divisions, url_id))
 
-    url = "https://data.perpetualmotion.org/allSports/schedule.php?leagueID=" + dict[division]
-
+    url = "https://data.perpetualmotion.org/allSports/schedule.php?leagueID=" + str(dictionary[division])
+    
     try:
         source = requests.get(url)
         source.raise_for_status()
@@ -48,12 +48,11 @@ def get_upcoming_schedule(division, day, month, date, team_num):
     days = []
 
 
-
     for i in day:
         days.append(i.text)
     
     #need to set playoff dates
-    playoff = [""]
+    playoff = ["Monday, June 24", "Tuesday, June 25", "Wednesday, June 26", "Thursday, June 27"]
 
     if today_date in playoff:
         return(f"We have playoffs that day, and there is no schedule for that yet.")
@@ -61,7 +60,6 @@ def get_upcoming_schedule(division, day, month, date, team_num):
         print("yes")
     else:
         return(f"There are no games on {today_date}. Check for a different date")
-    
 
     #print(days)
 
@@ -72,6 +70,41 @@ def get_upcoming_schedule(division, day, month, date, team_num):
         nums.append(i.text)
 
     #print(nums)
+    #find the times of each game and append it. 
+    game_header = soup.find_all(id='game_header')
+    times = []
+
+    for i in game_header:
+        times.append(i.text)
+    
+
+    scheduled_time = []
+
+    # Initialize a list to store the current group of times
+    current_group = []
+
+    for time in times:
+        #check if the time starts with '6' (for 6pm)
+        if time.startswith('6'):
+            #if the current group is not empty, append it to scheduled_time
+            if current_group:
+                scheduled_time.append(current_group)
+            #start a new group with the current time
+            current_group = [time]
+        else:
+            #append the current time to the current group
+            current_group.append(time)
+
+    #append the last group to scheduled_time if it's not empty
+    if current_group:
+        scheduled_time.append(current_group)
+
+    
+    #print(scheduled_time)
+
+    time_dictionary = dict(zip(days, scheduled_time))
+
+    print(time_dictionary)
 
     # left_team = soup.find("tbody").find_all_next("a")
     opponent = soup.find("tbody").find_all_next("a")
@@ -102,7 +135,7 @@ def get_upcoming_schedule(division, day, month, date, team_num):
 
         #sub_array.insert(0, days[count])
         split_arrays.append(sub_array)
-
+   
     #date each game: 
     # DATE, Field #, LEFT , RIGHT, LEFT, RIGHT 
     # 0  ,    1 ,     2,     3 ,    4 ,   5
@@ -131,8 +164,7 @@ def get_upcoming_schedule(division, day, month, date, team_num):
         if array[0] == today_date:
             current_games.append(array)
 
-    #print("MEEP")
-
+    
     #print(current_games)
     #[['Thursday, August 10', 'Margaret # 4', '1', '12', '12', '9'], 'Dark', 'White']
     # DATE, Field #, LEFT , RIGHT, LEFT, RIGHT 
@@ -140,13 +172,6 @@ def get_upcoming_schedule(division, day, month, date, team_num):
 
     first = []
     second = []
-
-    #find the times of each game and append it. 
-    game_header = soup.find_all(id='game_header')
-    times = []
-    for i in game_header:
-        times.append(i.text)
-    print(times)   
 
 
     for i in range (len(current_games)):
@@ -158,9 +183,8 @@ def get_upcoming_schedule(division, day, month, date, team_num):
             if j > 3 and current_games[i][j] == f'{team_num}':
                 second.append(current_games[i])
 
-        
-    # print(first)
-    # print(second)
+    #print(first)
+    #print(second)
 
 
     colour = ''
@@ -186,8 +210,9 @@ def get_upcoming_schedule(division, day, month, date, team_num):
         second.append(second_colour)
 
 
-    print(first)
-    print(second)
+    #print(first)
+    #print(second)
+
     #[['Thursday, August 10', 'Margaret # 4', '1', '12', '12', '9'], 'Dark', 'White', time]
     # DATE, Field #, LEFT , RIGHT, LEFT, RIGHT 
     # 0  ,    1 ,     2,     3 ,    4 ,   5
@@ -203,17 +228,9 @@ def get_upcoming_schedule(division, day, month, date, team_num):
     # First game
     if first[0][1] != "Practice Area":
         if first[1] == 'Dark':
-            message = f"{today_date}: our first game we are playing against **{dictionary[first[0][3]].strip()}** wearing **{first[1]}** on **{first[0][1]}**. "
+            message = f"{today_date}: our first game at **{time_dictionary[today_date][0]}**, we are playing against **{dictionary[first[0][3]].strip()}** wearing **{first[1]}** on **{first[0][1]}**. "
         elif first[1] == 'White':
-            message = f"{today_date}: our first game we are playing against **{dictionary[first[0][2]].strip()}** wearing **{first[1]}** on **{first[0][1]}**. "
-
-        if today_date == "Thursday, September 14":
-            message += "Our first game starts at **6:15 PM**. "
-
-        elif today_date == "Thursday, September 21":
-            message += "Our first game starts at **8:30 PM**. "
-        else:
-            message += "Our first game starts at **6:30 PM**. "
+            message = f"{today_date}: our first game at **{time_dictionary[today_date][0]}**, we are playing against **{dictionary[first[0][2]].strip()}** wearing **{first[1]}** on **{first[0][1]}**. "
 
     else:
         message = f"{today_date}: our first game we are practicing at **{first[0][1]}**."
@@ -222,19 +239,15 @@ def get_upcoming_schedule(division, day, month, date, team_num):
     if second[0][1] != "Practice Area":
 
         if second[1] == 'Dark':
-            message += f"In our second game, we are playing against **{dictionary[second[0][5]].strip()}** wearing **{second[1]}** on **{second[0][1]}**. "
+            message += f"In our second game at **{time_dictionary[today_date][1]}**, we are playing against **{dictionary[second[0][5]].strip()}** wearing **{second[1]}** on **{second[0][1]}**. "
         elif second[1] == 'White':
-            message += f"In our second game, we are playing against **{dictionary[second[0][4]].strip()}** wearing **{second[1]}** on **{second[0][1]}**. "
-    
-        if today_date == "Thursday, September 14":
-            message += "Our second game starts at **7:05 PM**."
-        elif today_date == "Thursday, September 21":
-            message += "Our second game starts at **9:20 PM**."
-        else:
-            message += "Our second game starts at **7:20 PM**."            
-    
+            message += f"In our second game at **{time_dictionary[today_date][1]}**, we are playing against **{dictionary[second[0][4]].strip()}** wearing **{second[1]}** on **{second[0][1]}**. "
+             
     else:
         message += f"In our second game, we are practicing at **{second[0][1]}**."
+
+
+
 
     return message
 
