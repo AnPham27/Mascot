@@ -50,9 +50,7 @@ def run():
         await ctx.send(table)
         await ctx.send(message)
 
-
-    
-
+  
     bot.run(settings.DISCORD_API_SECRET)
     #bot.run("") #for quick testing
 
