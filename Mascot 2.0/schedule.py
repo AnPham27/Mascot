@@ -17,8 +17,8 @@ def find_time_slot(todays_games, team_num):
 def get_upcoming_schedule(division, day, month, date, team_num):
 
     divisions = ["b7", "ct", "b2", "c", "b2/c1", "c2"]
-    #url_id = [2037, 2045, 2051, 2052, 2057, 2058]
-    url_id = [2037, 2045, 2051, 2052, 2057, 2011]
+    url_id = [2037, 2045, 2051, 2052, 2057, 2058]
+    #url_id = [2037, 2045, 2051, 2052, 2057, 2011]
     dictionary = dict(zip(divisions, url_id))
 
     url = "https://data.perpetualmotion.org/allSports/schedule.php?leagueID=" + str(dictionary[division])
